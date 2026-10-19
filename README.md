@@ -4,6 +4,7 @@ taskflow/
 │
 
 ├── config/
+
 │   ├── database.php        ← configuração da conexão PDO
 
 │   └── config.php          ← constantes globais (versão, debug, etc.)
