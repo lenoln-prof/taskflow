@@ -1,4 +1,4 @@
-# 2.2 Estrutura de Pastas
+# 2.2 Estrutura de Pastas do TaskFlow
 
 taskflow/
 │
