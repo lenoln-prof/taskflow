@@ -24,7 +24,6 @@ class Task
         return $stmt->fetchColumn() !== false;
     }
 
-    // Inserir criar() e listar() dentro desta classe.
     public function criar(
         int $projectId,
         string $titulo,
@@ -107,5 +106,27 @@ class Task
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Os demais métodos serão desenvolvidos depois.
+    public function buscarPorId(int $id, int $userId): ?array
+    {
+        $sql = 'SELECT t.id, t.titulo, t.descricao, t.status, t.prioridade,
+                   t.data_inicio, t.data_prazo, t.project_id,
+                   p.nome AS projeto_nome, t.created_at, t.updated_at
+            FROM tasks t
+            INNER JOIN projects p ON p.id = t.project_id
+            WHERE t.id = :id AND p.user_id = :user_id';
+
+        // TODO: preparar SQL e executar os dois parâmetros.
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $id,
+            'user_id' => $userId
+        ]);
+
+        // TODO: obter uma linha usando fetch(PDO::FETCH_ASSOC).
+        $tarefa = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // TODO: retornar null se fetch() devolver false.
+        return $tarefa === false ? null : $tarefa;
+    }
+
 }
