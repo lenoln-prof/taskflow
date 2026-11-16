@@ -68,5 +68,44 @@ class Task
         return $tarefa;
     }
 
+    public function listar(int $userId, array $filtros = []): array
+    {
+        $sql = 'SELECT t.id, t.titulo, t.descricao, t.status, t.prioridade,
+                   t.data_inicio, t.data_prazo, t.project_id,
+                   p.nome AS projeto_nome, t.created_at, t.updated_at
+            FROM tasks t
+            INNER JOIN projects p ON p.id = t.project_id
+            WHERE p.user_id = :user_id';
+        $params = ['user_id' => $userId];
+
+        if (isset($filtros['project_id'])) {
+            $sql .= ' AND t.project_id = :project_id';
+            $params['project_id'] = $filtros['project_id'];
+        }
+        if (isset($filtros['status'])) {
+            $sql .= ' AND t.status = :status';
+            $params['status'] = $filtros['status'];
+        }
+        if (isset($filtros['prioridade'])) {
+            $sql .= ' AND t.prioridade = :prioridade';
+            $params['prioridade'] = $filtros['prioridade'];
+        }
+
+        $sql .= ' ORDER BY t.data_prazo ASC NULLS LAST, t.id DESC
+              LIMIT :limite';
+        $params['limite'] = $filtros['limite'] ?? 50;
+
+        $stmt = $this->pdo->prepare($sql);
+        foreach ($params as $nome => $valor) {
+            $stmt->bindValue(
+                ':' . $nome,
+                $valor,
+                is_int($valor) ? PDO::PARAM_INT : PDO::PARAM_STR
+            );
+        }
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // Os demais métodos serão desenvolvidos depois.
 }

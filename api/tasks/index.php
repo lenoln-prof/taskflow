@@ -13,6 +13,55 @@ $metodo = $_SERVER['REQUEST_METHOD'];
 try {
     if ($metodo === 'GET') {
         // TODO: Funcionalidade 2 (listar).
+        $filtros = [];
+        $projectGet = $_GET['project_id'];
+        $statusGet = $_GET['status'];
+        $prioridadeGet = $_GET['prioridade'];
+        $limiteGet = $_GET['limite'];
+
+        if (isset($projectGet)) {
+            $projectId = filter_var(
+                $projectGet,
+                FILTER_VALIDATE_INT,
+                ['options' => ['min_range' => 1]]
+            );
+            if ($projectId === false) {
+                json_response(false, 'project_id inválido', null, 400);
+            }
+            $filtros['project_id'] = $projectId;
+        }
+
+        // TODO: status deve estar em Task::STATUS (in_array estrito).
+        if (isset($statusGet)) {
+            if (!in_array($statusGet, Task::STATUS, true)) {
+                json_response(false, 'status inválido', null, 400);
+            }
+            $filtros['status'] = $statusGet;
+        }
+
+        // TODO: prioridade deve estar em Task::PRIORIDADES.
+        if (isset($prioridadeGet)) {
+            if (!in_array($prioridadeGet, Task::PRIORIDADES, true)) {
+                json_response(false, 'prioridade inválida', null, 400);
+            }
+            $filtros['prioridade'] = $prioridadeGet;
+        }
+
+        // TODO: limite: inteiro entre 1 e 100 (min_range e max_range).
+        if (isset($limiteGet)) {
+            $limite = filter_var(
+                $limiteGet,
+                FILTER_VALIDATE_INT,
+                ['options' => ['min_range' => 1, 'max_range' => 100]]
+            );
+            if ($limite === false) {
+                json_response(false, 'limite deve ser inteiro de 1 a 100', null, 400);
+            }
+            $filtros['limite'] = $limite;
+        }
+
+        $tarefas = $task->listar($userId, $filtros);
+        json_response(true, 'Tarefas listadas', $tarefas);
 
     } elseif ($metodo === 'POST') {
         $dados = ler_json_corpo();
