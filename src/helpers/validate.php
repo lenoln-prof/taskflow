@@ -46,3 +46,19 @@ function validar_login(array $dados): array
 
     return $erros;
 }
+
+function ler_json_corpo(): ?array
+{
+    $dados = json_decode(file_get_contents('php://input'), true);
+    if (!is_array($dados) || array_is_list($dados)) {
+        return null; // JSON inválido, ou lista no lugar de objeto
+    }
+    return $dados;
+}
+
+function validar_data_iso(string $data): bool
+{
+    $d = DateTimeImmutable::createFromFormat('!Y-m-d', $data);
+    return $d !== false && $d->format('Y-m-d') === $data;
+}
+
