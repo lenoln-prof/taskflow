@@ -51,5 +51,24 @@ class Project
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function buscarPorId(int $id, int $userId): ?array
+    {
+        $sql = 'SELECT id, nome, descricao, status,
+                   user_id, created_at, updated_at
+            FROM projects
+            WHERE id = :id AND user_id = :user_id';
 
+        // TODO: preparar o SQL e executar com os dois parâmetros
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $id,
+            'user_id' => $userId
+        ]);
+
+        // TODO: obter uma linha com fetch(PDO::FETCH_ASSOC)
+        $projeto = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // TODO: retornar null quando fetch() devolver false
+        return $projeto === false ? null : $projeto;
+    }
 }
