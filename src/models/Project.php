@@ -71,4 +71,33 @@ class Project
         // TODO: retornar null quando fetch() devolver false
         return $projeto === false ? null : $projeto;
     }
+
+    public function atualizar(
+        int $id, int $userId, string $nome,
+        ?string $descricao, string $status
+    ): ?array {
+        $sql = 'UPDATE projects
+            SET nome = :nome, descricao = :descricao,
+                status = :status, updated_at = NOW()
+            WHERE id = :id AND user_id = :user_id
+            RETURNING id, nome, descricao, status,
+                      user_id, created_at, updated_at';
+
+        // TODO: preparar e executar com os cinco parâmetros
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $id,
+            'user_id' => $userId,
+            'nome' => $nome,
+            'descricao' => $descricao,
+            'status' => $status
+        ]);
+
+        // TODO: obter a linha alterada com fetch(PDO::FETCH_ASSOC)
+        $projetoAtualizado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // TODO: retornar a linha, ou null se fetch() devolver false
+        return $projetoAtualizado === false ? null : $projetoAtualizado;
+    }
+
 }

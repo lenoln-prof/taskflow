@@ -29,17 +29,53 @@ try {
     if ($metodo === 'GET') {
         // TODO (Funcionalidade 3): buscar
         $projeto = $projects->buscarPorId($id, $userId);
-        // TODO: se $projeto for null, responder 404 ('Projeto não encontrado')
 
+        // TODO: se $projeto for null, responder 404 ('Projeto não encontrado')
         if (!$projeto) {
             json_response(false, 'Projeto não encontrado', null, 404);
         }
+
         // TODO: caso contrário, responder 200 com os dados
         json_response(true, 'Projeto encontrado', $projeto);
 
     } elseif ($metodo === 'PUT') {
         // TODO (Funcionalidade 4): atualizar
+        // TODO: ler o corpo e decodificar (JSON inválido: 400)
+        $corpo = file_get_contents('php://input');
 
+        try {
+            $dados = json_decode($corpo, true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $e) {
+            json_response(false, 'JSON inválido', null, 400);
+        }
+
+        // TODO: validar nome, descricao e status (erros: 422)
+        $nome = trim($dados['nome']);
+        $descricao = trim($dados['descricao']);
+        $status = trim($dados['status']);
+        $erros = [];
+
+        if (empty($nome)) {
+            $erros['nome'] = 'nome: projeto deve conter um nome';
+        }
+
+        if (empty($status)) {
+            $erros['status'] = 'status: defina o status do projeto';
+        }
+
+        if ($erros) {
+            json_response(false, 'Dados inválidos', $erros, 422);
+        }
+
+        // TODO: $projeto = $model->atualizar(...)
+        $projeto = $projects->atualizar($id, $userId, $nome, $descricao, $status);
+
+        // TODO: 200 com $projeto, ou 404 se for null
+        if (!$projeto) {
+            json_response(false, 'Falha ao atualizar projeto.', null, 404);
+        }
+
+        json_response(true, 'Projeto atualizado com sucesso!', $projeto);
 
     } else {
         // TODO (Funcionalidade 5): excluir
