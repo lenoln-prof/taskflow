@@ -100,4 +100,21 @@ class Project
         return $projetoAtualizado === false ? null : $projetoAtualizado;
     }
 
+    public function deletar(int $id, int $userId): bool
+    {
+        $sql = 'DELETE FROM projects
+            WHERE id = :id AND user_id = :user_id
+            RETURNING id';
+
+        // TODO: preparar e executar com os dois parâmetros
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $id,
+            'user_id' => $userId
+        ]);
+
+        // TODO: retornar true se fetch() devolver uma linha
+        // TODO: retornar false se não houver linha
+        return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
+    }
 }

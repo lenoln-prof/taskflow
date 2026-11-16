@@ -79,10 +79,21 @@ try {
 
     } else {
         // TODO (Funcionalidade 5): excluir
+        $excluido = $projects->deletar($id, $userId);
 
+        if (!$excluido) {
+            json_response(false, 'Projeto não encontrado.', null, 404);
+        }
+
+        json_response(true, 'Projeto excluído com sucesso!');
     }
 } catch (PDOException | RuntimeException $e) {
     // TODO: na Funcionalidade 5, tratar o SQLSTATE 23503 como 409
+    if ($e instanceof PDOException && $e->getCode() === '23503') {
+        // TODO: responder 409 (o projeto possui tarefas)
+        json_response(false, 'O projeto possui tarefas', null, 409);
+    }
+
     error_log($e->getMessage());
     json_response(false, 'Erro interno do servidor', null, 500);
 }
