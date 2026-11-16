@@ -8,14 +8,17 @@ require_once __DIR__ . '/../../src/models/Project.php';
 verificar_autenticacao();
 
 $userId = (int) $_SESSION['user_id'];
-$project = new Project($pdo);
+$projects = new Project($pdo);
 $metodo = $_SERVER['REQUEST_METHOD'];
 
 try {
     if ($metodo === 'GET') {
         // TODO (Funcionalidade 2): listar os projetos
+        $projetos = $projects->listar($userId);
+        json_response(true, 'Projetos listados com sucesso', $projetos);
 
     } elseif ($metodo === 'POST') {
+        // TODO (Funcionalidade 1): criar um projeto
         $corpo = file_get_contents('php://input');
 
         try {
@@ -51,7 +54,7 @@ try {
             json_response(false, 'Dados inválidos', $erros, 422);
         }
 
-        $projeto = $project->criar($nome, $descricao, $userId);
+        $projeto = $projects->criar($nome, $descricao, $userId);
         json_response(true, 'Projeto criado com sucesso', $projeto, 201);
 
     } else {

@@ -36,4 +36,20 @@ class Project
         return $projeto;
     }
 
+    public function listar(int $userId): array
+    {
+        // O filtro restringe o resultado ao dono autenticado.
+        $sql = 'SELECT id, nome, descricao, status,
+                   user_id, created_at, updated_at
+            FROM projects
+            WHERE user_id = :user_id
+            ORDER BY created_at DESC, id DESC';
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['user_id' => $userId]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
 }
