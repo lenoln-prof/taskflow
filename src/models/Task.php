@@ -129,4 +129,33 @@ class Task
         return $tarefa === false ? null : $tarefa;
     }
 
+    public function atualizarStatus(
+        int $id,
+        int $userId,
+        string $status
+    ): ?array {
+        $sql = 'UPDATE tasks
+            SET status = :status, updated_at = NOW()
+            WHERE id = :id
+              AND project_id IN (
+                  SELECT id FROM projects WHERE user_id = :user_id
+              )
+            RETURNING id, titulo, status, prioridade,
+                      project_id, updated_at';
+
+        // TODO: preparar e executar os três parâmetros.
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'status' => $status,
+            'id' => $id,
+            'user_id' => $userId
+        ]);
+
+        $statusAtualizado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // TODO: retornar a linha alterada ou null.
+        return $statusAtualizado === false ? null : $statusAtualizado;
+    }
+
+
 }
