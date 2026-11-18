@@ -1,0 +1,491 @@
+{
+	"info": {
+		"_postman_id": "163c14ce-3e66-48aa-94ab-97ecc77abea5",
+		"name": "TaskFlow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "56043185"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Busca usuários",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/api/users/index.php",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"index.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Usuários",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\" : \"Lenoln Muniz\",\n    \"email\" : \"teste@teste.com\",\n    \"senha\" : \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/auth/register.php",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"lenoln@lenoln.com\", \n    \"senha\" : \"lenoln@lenoln\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/auth/login.php",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/auth/logout.php",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "Cadastrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"TaskFlow\",\n  \"descricao\": \"Organização dos trabalhos - Semana 6\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/projects/index.php",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"index.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/projects/index.php",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"index.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/projects-detail/index.php?id=3",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"projects-detail",
+								"index.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\" : \"Teste\",\n    \"descricao\" : \"\",\n    \"status\" : \"ativo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/projects-detail/index.php?id=3",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"projects-detail",
+								"index.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/api/projects-detail/index.php?id=4",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"projects-detail",
+								"index.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "Cadastrar Tarefa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"titulo\": \"POST, PATCH, DELETE\",\n  \"descricao\": \"Primeira versão CRUD\",\n  \"prioridade\": \"alta\",\n  \"data_inicio\": \"2026-11-02\",\n  \"data_prazo\": \"2026-11-19\",\n  \"project_id\": 3\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/tasks/",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/api/tasks/index.php?status=pendente&prioridade=alta&limite=0",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"index.php"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "pendente"
+								},
+								{
+									"key": "prioridade",
+									"value": "alta"
+								},
+								{
+									"key": "limite",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/api/tasks-detail/index.php?id=1",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"tasks-detail",
+								"index.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza Status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"feito\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/tasks-detail/index.php?id=1",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"tasks-detail",
+								"index.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Tarefa",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"project_id\": 3,\n    \"titulo\" : \"Atualizar tarefa\",\n    \"prioridade\" : \"media\",\n    \"status\" : \"em_andamento\",\n    \"data_inicio\" : \"2026-11-18\",\n    \"data_prazo\" : \"2026-11-20\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/tasks-detail/index.php?id=1",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"tasks-detail",
+								"index.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/api/tasks-detail/index.php?id=3",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"tasks-detail",
+								"index.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
