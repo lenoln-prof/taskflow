@@ -203,5 +203,24 @@ class Task
         return $atualizado === false ? null : $atualizado;
     }
 
+    public function deletar(int $id, int $userId): bool
+    {
+        $sql = 'DELETE FROM tasks
+            WHERE id = :id
+              AND project_id IN (
+                  SELECT id FROM projects WHERE user_id = :user_id
+              )
+            RETURNING id';
+        // TODO: preparar e executar os dois parâmetros.
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $id,
+            'user_id' => $userId
+        ]);
+
+        // TODO: retornar true se houver linha em fetch().
+        // TODO: retornar false se não houver linha.
+        return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
+    }
 
 }

@@ -128,8 +128,17 @@ try {
 
         json_response(true, 'Tarefa atualizada com sucesso!', $atualizado);
 
-    }
+    } elseif ($metodo === 'DELETE') {
+        // TODO: chamar deletar($id, $userId).
+        $excluido = $task->deletar($id, $userId);
 
+        // TODO: false: responder 404; true: responder 200 com confirmação.
+        if (!$excluido) {
+            json_response(false, 'Tarefa não encontrada.', null, 404);
+        }
+
+        json_response(true, 'Tarefa excluída com sucesso!');
+    }
 
 } catch (PDOException $e) {
     error_log($e->getMessage());
