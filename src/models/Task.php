@@ -157,5 +157,51 @@ class Task
         return $statusAtualizado === false ? null : $statusAtualizado;
     }
 
+    public function atualizar(
+        int $id,
+        int $userId,
+        string $titulo,
+        ?string $descricao,
+        string $status,
+        string $prioridade,
+        ?string $dataInicio,
+        ?string $dataPrazo
+    ): ?array {
+        // TODO: UPDATE tasks SET titulo, descricao, status,
+        //       prioridade, data_inicio, data_prazo e
+        //       updated_at = NOW().
+        // TODO: WHERE id = :id AND project_id IN (subconsulta do dono),
+        //       igual ao atualizarStatus().
+        // TODO: RETURNING das colunas da tarefa.
+        $sql = 'UPDATE tasks
+            SET titulo = :titulo, descricao = :descricao,
+                status = :status, prioridade = :prioridade, 
+                data_inicio = :data_inicio, data_prazo = :data_prazo, updated_at = NOW()
+            WHERE id = :id
+              AND project_id IN (
+                  SELECT id FROM projects WHERE user_id = :user_id
+              )
+            RETURNING id, titulo, descricao, status, prioridade,
+                      data_inicio, data_prazo, project_id, user_id, updated_at';
+
+        // TODO: preparar, executar e retornar a linha ou null.
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'titulo' => $titulo,
+            'descricao' => $descricao,
+            'status' => $status,
+            'prioridade' => $prioridade,
+            'data_inicio' => $dataInicio,
+            'data_prazo' => $dataPrazo,
+            'id' => $id,
+            'user_id' => $userId
+        ]);
+
+        $atualizado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // TODO: retornar a linha alterada ou null.
+        return $atualizado === false ? null : $atualizado;
+    }
+
 
 }

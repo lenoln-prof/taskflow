@@ -60,7 +60,76 @@ try {
         }
 
         json_response(true, 'Status atualizado com sucesso!', $statusAtualizado);
+    } elseif ($metodo === 'PUT') {
+        $dados = ler_json_corpo();
+        // TODO: validar corpo e todos os campos (reaproveitar as
+        //       regras do POST; status em Task::STATUS).
+        if (!$dados) {
+            json_response(false, 'Corpo JSON inválido', null, 400);
+        }
+
+        if ($dados === null) {
+            json_response(false, 'Corpo JSON inválido', null, 400);
+        }
+
+        $projectId = filter_var(
+            $dados['project_id'] ?? null,
+            FILTER_VALIDATE_INT,
+            ['options' => ['min_range' => 1]]
+        );
+        $titulo = $dados['titulo'] ?? null;
+        $descricao = $dados['descricao'] ?? null;
+        $status = $dados['status'] ?? null;
+        $prioridade = $dados['prioridade'] ?? null;
+        $dataInicio = $dados['data_inicio'] ?? null;
+        $dataPrazo = $dados['data_prazo'] ?? null;
+
+        $erros = [];
+
+        if (!$projectId)
+            $erros[] = 'ID do projeto inválido.';
+        if (!is_string($titulo) || mb_strlen(trim($titulo)) < 1 || mb_strlen(trim($titulo)) > 200)
+            $erros[] = 'titulo deve ser texto de 1 a 200 caracteres';
+        if ($descricao !== null && !is_string($descricao))
+            $erros[] = 'descricao deve ser texto ou null';
+        if (!is_string($prioridade) || !in_array($prioridade, Task::PRIORIDADES, true))
+            $erros[] = 'prioridade inválida';
+        if (!is_string($status) || !in_array($status, Task::STATUS, true))
+            $erros[] = 'status inválido';
+
+        $datasValidas = true;
+        $campos = ['data_inicio' => $dataInicio, 'data_prazo' => $dataPrazo];
+        foreach ($campos as $campo => $valor) {
+            if ($valor !== null && (!is_string($valor) || !validar_data_iso($valor))) {
+                $erros[] = "$campo deve estar no formato AAAA-MM-DD";
+                $datasValidas = false;
+            }
+        }
+
+        if ($datasValidas && $dataInicio !== null && $dataPrazo !== null && $dataPrazo < $dataInicio)
+            $erros[] = 'data_prazo não pode ser anterior a data_inicio';
+
+        if ($erros !== []) json_response(false, 'Dados inválidos', $erros, 400);
+
+        // TODO: chamar atualizar com valores já validados.
+        $titulo = trim($titulo);
+        if (!$descricao)
+            $descricao = trim($descricao);
+
+        $atualizado = $task->atualizar(
+            $id, $userId, $titulo, $descricao,
+            $status, $prioridade, $dataInicio, $dataPrazo
+        );
+
+        // TODO: responder 200 ou 404 conforme o resultado.
+        if (!$atualizado) {
+            json_response(false, 'Tarefa não encontrada.', null, 404);
+        }
+
+        json_response(true, 'Tarefa atualizada com sucesso!', $atualizado);
+
     }
+
 
 } catch (PDOException $e) {
     error_log($e->getMessage());
