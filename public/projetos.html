@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus projetos · TaskFlow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="app">
+    <div class="app-shell">
+        <aside class="app-sidebar">
+            <a class="nav-logo app-logo" href="/">
+                <span class="nav-logo-icon">✓</span>
+                <span class="nav-logo-text">Task<em>Flow</em></span>
+            </a>
+
+            <nav class="app-nav">
+                <a href="painel.html">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="1.5" width="6" height="6" rx="1.3"/><rect x="8.5" y="1.5" width="6" height="6" rx="1.3"/><rect x="1.5" y="8.5" width="6" height="6" rx="1.3"/><rect x="8.5" y="8.5" width="6" height="6" rx="1.3"/></svg>
+                    Painel
+                </a>
+                <a href="projetos.html" class="active">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="2.5" width="13" height="11" rx="1.6"/><path d="M1.5 6h13" stroke-linecap="round"/></svg>
+                    Meus projetos
+                </a>
+                <a href="hoje.html">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="2.5" width="13" height="11.5" rx="1.6"/><path d="M1.5 6h13M4.5 1.2v2.2M11.5 1.2v2.2" stroke-linecap="round"/></svg>
+                    Hoje
+                </a>
+                <a href="concluidos.html">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="6.3"/><path d="M5.3 8.2l1.8 1.8 3.4-3.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Concluídos
+                    <span class="nav-count">1</span>
+                </a>
+            </nav>
+
+            <div class="app-nav-section">
+                <span class="app-nav-label">Projetos</span>
+                <nav class="app-nav app-nav-projects">
+                    <a href="#"><span class="dot dot-teal"></span>TCC — Sistema de Recomen…</a>
+                    <a href="#"><span class="dot dot-muted"></span>Aprender Espanhol</a>
+                    <a href="#"><span class="dot dot-muted"></span>Reforma do Quarto</a>
+                    <a href="#"><span class="dot dot-muted"></span>Treino para a Meia Maratona</a>
+                    <a href="#"><span class="dot dot-teal"></span>Portfólio de Projetos</a>
+                </nav>
+            </div>
+
+            <div class="app-user">
+                <span class="app-user-avatar">LM</span>
+                <span class="app-user-info">
+                    <strong>Lenoln Muniz</strong>
+                    <small>Conta pessoal</small>
+                </span>
+                <a id="logout">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" class="app-user-exit"><path d="M6 2.5H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3M10.5 11l3-3-3-3M13 8H5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </div>
+        </aside>
+
+        <main class="app-main">
+            <header class="app-header">
+                <div>
+                    <h1>Meus projetos</h1>
+                    <p class="app-subtitle">5 projetos · 4 em andamento · 1 concluídos</p>
+                </div>
+                <button class="btn btn-primary btn-new-project" type="button">
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v10M3 8h10" stroke-linecap="round"/></svg>
+                    Novo projeto
+                </button>
+            </header>
+
+            <div class="app-toolbar">
+                <div class="search-field">
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5" stroke-linecap="round"/></svg>
+                    <input type="text" placeholder="Buscar projetos...">
+                </div>
+                <select class="status-select">
+                    <option>Todos os status</option>
+                    <option>Em andamento</option>
+                    <option>Concluído</option>
+                </select>
+                <div class="view-toggle">
+                    <button type="button" aria-label="Visualização em grade">
+                        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="1.5" width="5.5" height="5.5" rx="1"/><rect x="9" y="1.5" width="5.5" height="5.5" rx="1"/><rect x="1.5" y="9" width="5.5" height="5.5" rx="1"/><rect x="9" y="9" width="5.5" height="5.5" rx="1"/></svg>
+                    </button>
+                    <button type="button" class="active" aria-label="Visualização em lista">
+                        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1.5 4h13M1.5 8h13M1.5 12h13" stroke-linecap="round"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="project-table">
+                <div class="project-table-head">
+                    <span class="col-nome">Projeto</span>
+                    <span class="col-status">Status</span>
+                    <span class="col-progresso">Progresso</span>
+                    <span class="col-tarefas">Tarefas</span>
+                </div>
+
+                <div id="area-projetos"></div>
+
+            </div>
+        </main>
+    </div>
+    <script src="js/auth/logout.js"></script>
+    <script src="js/projetos.js"></script>
+</body>
+</html>
