@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: application/json; charset=utf-8');
+ini_set('display_errors', 0);
 
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../src/helpers/response.php';
@@ -33,9 +35,7 @@ try {
     $user = $stmt->fetch();
 
     // TODO: verificar a senha com password_verify
-    $senhaCorreta = password_verify($senha, $user['senha_hash']);
-
-    if (!$user || !$senhaCorreta){
+    if (!$user || !password_verify($senha, $user['senha_hash'])){
         json_response(false, "Email ou senha inválidos.", null, 401);
     }
 

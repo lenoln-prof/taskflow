@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="landing">
+    <header class="nav-bar">
+        <div class="nav">
+            <a class="nav-logo" href="/">
+                <span class="nav-logo-icon">✓</span>
+                <span class="nav-logo-text">Task<em>Flow</em></span>
+            </a>
+            <nav class="nav-links">
+                <a href="#recursos">Recursos</a>
+                <a href="#como-funciona">Como funciona</a>
+                <a href="auth/login.html">Entrar</a>
+            </nav>
+            <a class="btn btn-primary" href="auth/cadastro.html">Comece agora</a>
+        </div>
+    </header>
+
+    <main class="hero">
+        <div class="hero-text">
+            <span class="badge"><span class="badge-tag">NOVO</span> Progresso calculado automaticamente</span>
+
+            <h1>Suas tarefas,<br>finalmente <span class="accent">em ordem</span>.</h1>
+
+            <p class="hero-lead">
+                O TaskFlow organiza seus projetos em tarefas claras e calcula o progresso
+                sozinho. Sem planilhas, sem ruído — só o que você precisa fazer agora.
+            </p>
+
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="auth/cadastro.html">
+                    Comece agora
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h9.5M9 4.5L12.5 8 9 11.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a class="btn btn-ghost" href="#como-funciona">Ver demonstração</a>
+            </div>
+
+            <p class="hero-footnote">Grátis para uso pessoal · Sem cartão de crédito</p>
+        </div>
+
+        <div class="hero-preview" id="recursos">
+            <div class="preview-window">
+                <div class="preview-bar">
+                    <span></span><span></span><span></span>
+                    <div class="preview-url">taskflow.app/projetos</div>
+                </div>
+                <div class="preview-body">
+                    <div class="preview-head">
+                        <strong>TCC — Recomendação</strong>
+                        <span class="pill pill-status">Em andamento</span>
+                    </div>
+                    <div class="progress-row">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 40%"></div>
+                        </div>
+                        <span class="progress-value">40%</span>
+                    </div>
+
+                    <ul class="preview-tasks">
+                        <li class="done">
+                            <span class="check">✓</span>
+                            <span>Revisão bibliográfica</span>
+                            <span class="pill pill-prioridade">Alta</span>
+                        </li>
+                        <li class="done">
+                            <span class="check">✓</span>
+                            <span>Definir arquitetura</span>
+                            <span class="pill pill-prioridade">Alta</span>
+                        </li>
+                        <li>
+                            <span class="check"></span>
+                            <span>Implementar protótipo</span>
+                            <span class="pill pill-prioridade">Alta</span>
+                        </li>
+                        <li>
+                            <span class="check"></span>
+                            <span>Escrever metodologia</span>
+                            <span class="pill pill-prioridade pill-media">Média</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section id="como-funciona" class="features">
+        <div class="feature">
+            <span class="feature-number">01</span>
+            <h3>Projetos organizados</h3>
+            <p>Tudo em um só painel, sem planilhas espalhadas.</p>
+        </div>
+        <div class="feature">
+            <span class="feature-number">02</span>
+            <h3>Progresso automático</h3>
+            <p>O TaskFlow calcula o percentual concluído de cada projeto para você.</p>
+        </div>
+        <div class="feature">
+            <span class="feature-number">03</span>
+            <h3>Prioridades e prazos</h3>
+            <p>Saiba sempre o que é urgente e o que pode esperar.</p>
+        </div>
+    </section>
+</body>
+</html>

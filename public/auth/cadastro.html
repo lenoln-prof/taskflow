@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar conta · TaskFlow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/app.js"></script>
+</head>
+<body>
+    <main class="auth-split">
+        <aside class="auth-side">
+            <a class="nav-logo" href="/public">
+                <span class="nav-logo-icon">✓</span>
+                <span class="nav-logo-text">Task<em>Flow</em></span>
+            </a>
+
+            <div class="auth-side-content">
+                <h2>Organize seus projetos com clareza.</h2>
+                <p>Acompanhe o progresso das suas tarefas em um só lugar — simples, direto e sem ruído.</p>
+
+                <ul class="auth-side-list">
+                    <li><span class="check">✓</span> Projetos e tarefas em um só painel</li>
+                    <li><span class="check">✓</span> Progresso calculado automaticamente</li>
+                    <li><span class="check">✓</span> Prioridades e prazos sempre visíveis</li>
+                </ul>
+            </div>
+
+            <p class="auth-side-footer">Projeto acadêmico · 2026</p>
+        </aside>
+
+        <section class="auth-form-panel">
+            <div class="auth-form-inner">
+                <h1>Criar sua conta</h1>
+                <p class="auth-subtitle">Comece a organizar seus projetos em segundos.</p>
+
+                <form id="form-cadastro">
+                    <label for="cadastro-nome">Nome completo</label>
+                    <input type="text" id="cadastro-nome" name="nome" placeholder="Como devemos te chamar?" required>
+
+                    <label for="cadastro-email">E-mail</label>
+                    <input type="email" id="cadastro-email" name="email" placeholder="voce@email.com" required>
+
+                    <div class="field-label-row">
+                        <label for="cadastro-senha">Senha</label>
+                        <button type="button" class="link-button" id="cadastro-toggle-senha">Mostrar</button>
+                    </div>
+                    <input type="password" id="cadastro-senha" name="senha" placeholder="Mínimo de 6 caracteres" required minlength="6">
+
+                    <label for="cadastro-confirmar-senha">Confirmar senha</label>
+                    <input type="password" id="cadastro-confirmar-senha" placeholder="Repita a senha" required minlength="6">
+
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="cadastro-termos" required>
+                        Concordo com os <strong>Termos de Uso</strong> e a <strong>Política de Privacidade</strong>.
+                    </label>
+
+                    <button type="submit">Criar conta</button>
+                </form>
+
+                <p id="cadastro-mensagem" class="mensagem"></p>
+
+                <p class="troca">Já tem uma conta? <a href="login.html">Entrar</a></p>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/shared/utils.js"></script>
+    <script src="../js/auth/register.js"></script>
+</body>
+</html>
