@@ -1,5 +1,8 @@
 <?php
 
+header('Content-Type: application/json; charset=utf-8');
+ini_set('display_errors', 0);
+
 require_once __DIR__ . '/../../src/helpers/response.php';
 require_once __DIR__ . '/../../src/helpers/auth.php';
 require_once __DIR__ . '/../../config/database.php';
